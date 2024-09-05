@@ -16,7 +16,7 @@ public class ProjectDto {
     @NonNull
     Long id;
 
-//    @NonNull
+    @NonNull
     String name;
 
     @NonNull
