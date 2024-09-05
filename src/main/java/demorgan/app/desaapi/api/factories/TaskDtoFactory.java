@@ -1,6 +1,6 @@
-package demorgan.app.desaapi.store.api.factories;
+package demorgan.app.desaapi.api.factories;
 
-import demorgan.app.desaapi.store.api.dto.TaskDto;
+import demorgan.app.desaapi.api.dto.TaskDto;
 import demorgan.app.desaapi.store.entities.TaskEntity;
 import org.springframework.stereotype.Component;
 

@@ -1,4 +1,4 @@
-package demorgan.app.desaapi.store.api.exceptions;
+package demorgan.app.desaapi.api.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

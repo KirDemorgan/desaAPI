@@ -1,4 +1,4 @@
-package demorgan.app.desaapi.store.api.exceptions;
+package demorgan.app.desaapi.api.exceptions;
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;

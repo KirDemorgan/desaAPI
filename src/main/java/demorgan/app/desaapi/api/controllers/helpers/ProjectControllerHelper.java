@@ -1,6 +1,6 @@
-package demorgan.app.desaapi.store.api.controllers.helpers;
+package demorgan.app.desaapi.api.controllers.helpers;
 
-import demorgan.app.desaapi.store.api.exceptions.NotFoundException;
+import demorgan.app.desaapi.api.exceptions.NotFoundException;
 import demorgan.app.desaapi.store.entities.ProjectEntity;
 import demorgan.app.desaapi.store.repositories.ProjectRepository;
 import jakarta.transaction.Transactional;

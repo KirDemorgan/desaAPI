@@ -1,4 +1,4 @@
-package demorgan.app.desaapi.store.api.dto;
+package demorgan.app.desaapi.api.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;

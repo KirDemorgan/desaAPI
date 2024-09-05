@@ -1,6 +1,6 @@
-package demorgan.app.desaapi.store.api.factories;
+package demorgan.app.desaapi.api.factories;
 
-import demorgan.app.desaapi.store.api.dto.TaskColumnDto;
+import demorgan.app.desaapi.api.dto.TaskColumnDto;
 import demorgan.app.desaapi.store.entities.TaskColumnEntity;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;

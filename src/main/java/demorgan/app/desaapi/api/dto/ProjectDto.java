@@ -1,4 +1,4 @@
-package demorgan.app.desaapi.store.api.dto;
+package demorgan.app.desaapi.api.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
@@ -11,17 +11,19 @@ import java.time.Instant;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class TaskDto {
+public class ProjectDto {
+
     @NonNull
     Long id;
 
     @NonNull
     String name;
 
-    @NonNull
     @JsonProperty("created_at")
+    @NonNull
     Instant createdAt;
 
+    @JsonProperty("created_at")
     @NonNull
-    String description;
+    Instant updatedAt;
 }

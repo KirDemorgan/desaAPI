@@ -1,18 +1,16 @@
-package demorgan.app.desaapi.store.api.controllers;
+package demorgan.app.desaapi.api.controllers;
 
-import demorgan.app.desaapi.store.api.controllers.helpers.ProjectControllerHelper;
-import demorgan.app.desaapi.store.api.dto.AnswerDto;
-import demorgan.app.desaapi.store.api.dto.ProjectDto;
-import demorgan.app.desaapi.store.api.exceptions.BadRequestException;
-import demorgan.app.desaapi.store.api.exceptions.NotFoundException;
-import demorgan.app.desaapi.store.api.factories.ProjectDtoFactory;
+import demorgan.app.desaapi.api.controllers.helpers.ProjectControllerHelper;
+import demorgan.app.desaapi.api.exceptions.BadRequestException;
+import demorgan.app.desaapi.api.dto.AnswerDto;
+import demorgan.app.desaapi.api.dto.ProjectDto;
+import demorgan.app.desaapi.api.factories.ProjectDtoFactory;
 import demorgan.app.desaapi.store.entities.ProjectEntity;
 import demorgan.app.desaapi.store.repositories.ProjectRepository;
 import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.hibernate.grammars.hql.HqlParser;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -99,10 +97,6 @@ public class ProjectController {
 
     projectRepository.deleteById(projectId);
 
-    return AnswerDto.builder()
-            .answer("Project  with id" + projectId + "deleted successfully")
-            .build();
+    return AnswerDto.makeDefaults("Project  with id" + projectId + "deleted successfully");
     }
-
-
 }
