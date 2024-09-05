@@ -9,5 +9,4 @@ public class DesaApiApplication {
     public static void main(String[] args) {
         SpringApplication.run(DesaApiApplication.class, args);
     }
-
 }
