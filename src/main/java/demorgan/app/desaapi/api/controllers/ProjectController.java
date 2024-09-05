@@ -14,6 +14,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -56,15 +57,14 @@ public class ProjectController {
 
     @PostMapping(CREATE_OR_UPDATE_PROJECT)
     public ProjectDto createProject(
-            @RequestParam(value = "project_name", required = false) Optional<Long> optionalProjectId,
-            @RequestParam(value = "project_id", required = false) Optional<String> optionalProjectName
-            ){
+            @RequestParam(value = "project_id", required = false) Optional<Long> optionalProjectId,
+            @RequestParam(value = "project_name", required = false) Optional<String> optionalProjectName){
 
-        boolean isCreateRequest = optionalProjectId.isEmpty();
+        boolean isCreateRequest = !optionalProjectId.isPresent();
 
-        optionalProjectName = optionalProjectName.filter(projectName -> projectName.trim().isEmpty());
+        optionalProjectName = optionalProjectName.filter(projectName -> !projectName.trim().isEmpty());
 
-        if (isCreateRequest && optionalProjectName.isPresent()) {
+        if (isCreateRequest && !optionalProjectName.isPresent()) {
             throw new BadRequestException("Project name is required");
         }
 
@@ -77,7 +77,7 @@ public class ProjectController {
                         projectName -> {
                             projectRepository
                                     .findByName(projectName)
-                                    .filter(anotherProject -> !anotherProject.getId().equals(project.getId()))
+                                    .filter(anotherProject -> !Objects.equals(anotherProject.getId(), project.getId()))
                                     .ifPresent(anotherProject -> {
                                         throw new BadRequestException(
                                                 "Project name already exists"
@@ -97,6 +97,6 @@ public class ProjectController {
 
     projectRepository.deleteById(projectId);
 
-    return AnswerDto.makeDefaults("Project  with id" + projectId + "deleted successfully");
+    return AnswerDto.makeDefaults("Project  with id" + projectId + " deleted successfully");
     }
 }

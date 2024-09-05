@@ -16,14 +16,14 @@ public class ProjectDto {
     @NonNull
     Long id;
 
-    @NonNull
+//    @NonNull
     String name;
 
-    @JsonProperty("created_at")
     @NonNull
+    @JsonProperty("created_at")
     Instant createdAt;
 
-    @JsonProperty("created_at")
     @NonNull
+    @JsonProperty("updated_at")
     Instant updatedAt;
 }

@@ -23,20 +23,28 @@ public class CustomErrorController implements ErrorController {
     ErrorAttributes errorAttributes;
 
     @RequestMapping(CustomErrorController.PATH)
-    public ResponseEntity<ErrorDto> error(WebRequest webRequest) {
+    public ResponseEntity<ErrorResponse> error(WebRequest webRequest) {
 
         Map<String, Object> attributes = errorAttributes.getErrorAttributes(
                 webRequest,
                 ErrorAttributeOptions.of(ErrorAttributeOptions.Include.EXCEPTION, ErrorAttributeOptions.Include.MESSAGE)
         );
 
+        ErrorResponse errorResponse = new ErrorResponse((String) attributes.get("message"));
         return ResponseEntity
                 .status((Integer) attributes.get("status"))
-                .body(ErrorDto
-                        .builder()
-                        .error((String) attributes.get("error"))
-                        .errorDescription((String) attributes.get("message"))
-                        .build()
-                );
+                .body(errorResponse);
+    }
+
+    static class ErrorResponse {
+        private final String message;
+
+        public ErrorResponse(String message) {
+            this.message = message;
+        }
+
+        public String getMessage() {
+            return message;
+        }
     }
 }
