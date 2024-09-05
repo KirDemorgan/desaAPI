@@ -60,11 +60,11 @@ public class ProjectController {
             @RequestParam(value = "project_id", required = false) Optional<Long> optionalProjectId,
             @RequestParam(value = "project_name", required = false) Optional<String> optionalProjectName){
 
-        boolean isCreateRequest = !optionalProjectId.isPresent();
+        boolean isCreateRequest = optionalProjectId.isEmpty();
 
         optionalProjectName = optionalProjectName.filter(projectName -> !projectName.trim().isEmpty());
 
-        if (isCreateRequest && !optionalProjectName.isPresent()) {
+        if (isCreateRequest && optionalProjectName.isEmpty()) {
             throw new BadRequestException("Project name is required");
         }
 
