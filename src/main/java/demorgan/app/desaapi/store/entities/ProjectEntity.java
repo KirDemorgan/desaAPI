@@ -11,7 +11,6 @@ import java.util.List;
 @Entity
 @Builder
 @AllArgsConstructor
-@RequiredArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Setter

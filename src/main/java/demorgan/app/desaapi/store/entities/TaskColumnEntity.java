@@ -10,7 +10,6 @@ import java.util.List;
 
 @Entity
 @AllArgsConstructor
-@RequiredArgsConstructor
 @NoArgsConstructor
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)

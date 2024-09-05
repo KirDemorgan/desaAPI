@@ -8,7 +8,6 @@ import java.time.Instant;
 
 @Entity
 @AllArgsConstructor
-@RequiredArgsConstructor
 @NoArgsConstructor
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
