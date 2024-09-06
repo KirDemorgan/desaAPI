@@ -24,7 +24,11 @@ public class TaskColumnEntity {
     @Column(unique = true)
     String name;
 
-    String position;
+    @Builder.Default
+    Long position = 0L;
+
+    @ManyToOne
+    ProjectEntity project;
 
     @Builder.Default
     Instant createdAt = Instant.now();
