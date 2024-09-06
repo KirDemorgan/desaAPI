@@ -36,9 +36,9 @@ public class TaskController {
     TaskColumnControllerHelper taskColumnControllerHelper;
 
     public static final String GET_TASKS = "/projects/{task_column_id}/tasks";
-    public static final String CREATE_TASK= "/projects/{task_column_id}/task";
-    public static final String UPDATE_TASK = "/projects/{task_column_id}/task";
-    public static final String DELETE_TASK= "/projects/{task_column_id}/task";
+    public static final String CREATE_TASK = "/projects/{task_column_id}/task";
+    public static final String UPDATE_TASK = "/projects/{task_id}/task";
+    public static final String DELETE_TASK = "/projects/{task_column_id}/task";
 
 
     @GetMapping(GET_TASKS)
@@ -58,12 +58,12 @@ public class TaskController {
     public TaskDto createTask(
             @PathVariable(name = "task_column_id") Long taskColumnId,
             @RequestBody TaskRequestDto taskRequestDto
-            ) {
+    ) {
 
         String taskName = taskRequestDto.getTaskName();
         Optional<String> optionalTaskDescription = taskRequestDto.getOptionalTaskDescription();
 
-        if(taskName.trim().isEmpty()){
+        if (taskName.trim().isEmpty()) {
             throw new BadRequestException("Task name can't be empty.");
         }
 
@@ -83,6 +83,40 @@ public class TaskController {
                         .taskColumn(taskColumn)
                         .build()
         );
+        return taskDtoFactory.makeTaskDto(task);
+    }
+
+
+    @PatchMapping(UPDATE_TASK)
+    public TaskDto updateTask(
+            @PathVariable(name = "task_id") Long taskId,
+            @RequestBody TaskRequestDto taskRequestDto
+    ) {
+        String taskName = taskRequestDto.getTaskName();
+        Optional<String> optionalTaskDescription = taskRequestDto.getOptionalTaskDescription();
+
+        if (taskName.trim().isEmpty()) {
+            throw new BadRequestException("Task name can't be empty.");
+        }
+
+        TaskEntity task = taskControllerHelper.getTaskOrThrowException(taskId);
+
+        taskRepository
+                .findTaskEntityByIdAndNameContainsIgnoreCase(
+                        taskId,
+                        taskName
+                )
+                .filter(anotherTask -> !anotherTask.getId().equals(taskId))
+                .ifPresent(anotherTask -> {
+                    throw new BadRequestException("Task with the same name already exists.");
+                });
+
+        task.setName(taskName);
+
+        optionalTaskDescription.ifPresent(task::setDescription);
+
+        task = taskRepository.saveAndFlush(task);
+
         return taskDtoFactory.makeTaskDto(task);
     }
 }

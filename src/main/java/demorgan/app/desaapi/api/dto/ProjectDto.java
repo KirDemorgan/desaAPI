@@ -5,6 +5,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.Instant;
+import java.util.List;
 
 @Data
 @Builder
@@ -26,4 +27,6 @@ public class ProjectDto {
     @NonNull
     @JsonProperty("updated_at")
     Instant updatedAt;
+
+    private List<Long> taskColumnIds;
 }
