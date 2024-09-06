@@ -11,9 +11,4 @@ public class AnswerDto {
 
     String answer;
 
-    public static AnswerDto makeDefaults(String answer) {
-        return builder()
-                .answer(answer)
-                .build();
-    }
 }

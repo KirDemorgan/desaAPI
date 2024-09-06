@@ -9,7 +9,6 @@ import demorgan.app.desaapi.api.factories.TaskColumnDtoFactory;
 import demorgan.app.desaapi.store.entities.ProjectEntity;
 import demorgan.app.desaapi.store.entities.TaskColumnEntity;
 import demorgan.app.desaapi.store.repositories.TaskColumnRepository;
-import demorgan.app.desaapi.store.repositories.TaskRepository;
 import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -90,7 +89,7 @@ public class TaskColumnController {
             throw new BadRequestException("Task column name can't be empty.");
         }
 
-        TaskColumnEntity taskColumn = taskColumnControllerHelper.getTaskStateOrThrowException(taskColumnId);
+        TaskColumnEntity taskColumn = taskColumnControllerHelper.getTaskColumnOrThrowException(taskColumnId);
 
         taskColumnRepository
                 .findTaskColumnEntityByProjectIdAndNameContainsIgnoreCase(
@@ -114,7 +113,7 @@ public class TaskColumnController {
             @PathVariable(name = "task_column_id") Long taskColumnId,
             @RequestParam(name = "task_column_new_position") Long newPosition
     ) {
-        TaskColumnEntity taskColumn = taskColumnControllerHelper.getTaskStateOrThrowException(taskColumnId);
+        TaskColumnEntity taskColumn = taskColumnControllerHelper.getTaskColumnOrThrowException(taskColumnId);
 
         taskColumn.setPosition(newPosition);
 
@@ -128,7 +127,7 @@ public class TaskColumnController {
     public AnswerDto deleteColumn(
             @PathVariable(name = "task_column_id") Long taskColumnId
     ) {
-        TaskColumnEntity taskColumn = taskColumnControllerHelper.getTaskStateOrThrowException(taskColumnId);
+        TaskColumnEntity taskColumn = taskColumnControllerHelper.getTaskColumnOrThrowException(taskColumnId);
 
         taskColumnRepository.deleteById(taskColumnId);
 

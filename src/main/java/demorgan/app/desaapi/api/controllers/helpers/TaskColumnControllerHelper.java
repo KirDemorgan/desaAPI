@@ -17,7 +17,7 @@ public class TaskColumnControllerHelper {
 
     TaskColumnRepository taskColumnRepository;
 
-    public TaskColumnEntity getTaskStateOrThrowException(Long taskStateId) {
+    public TaskColumnEntity getTaskColumnOrThrowException(Long taskStateId) {
 
         return taskColumnRepository
                 .findById(taskStateId)

@@ -97,6 +97,8 @@ public class ProjectController {
 
     projectRepository.deleteById(projectId);
 
-    return AnswerDto.makeDefaults("Project  with id" + projectId + " deleted successfully");
+    return AnswerDto.builder()
+            .answer("Project  with id" + projectId + " deleted successfully")
+            .build();
     }
 }

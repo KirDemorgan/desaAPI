@@ -26,4 +26,9 @@ public class TaskEntity {
     Instant createdAt = Instant.now();
 
     String description;
+
+    @ManyToOne
+    @JoinColumn(name = "task_column_id")
+    private TaskColumnEntity taskColumn;
+
 }

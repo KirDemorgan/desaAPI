@@ -2,11 +2,13 @@ package demorgan.app.desaapi.api.factories;
 
 import demorgan.app.desaapi.api.dto.TaskColumnDto;
 import demorgan.app.desaapi.store.entities.TaskColumnEntity;
+import demorgan.app.desaapi.store.entities.TaskEntity;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -18,14 +20,14 @@ public class TaskColumnDtoFactory {
 
     public TaskColumnDto makeTaskColumnDto(TaskColumnEntity entity){
 
+        List<TaskEntity> tasks = entity.getTasks();
+
         return TaskColumnDto.builder()
                 .id(entity.getId())
                 .name(entity.getName())
                 .createdAt(entity.getCreatedAt())
                 .position(entity.getPosition())
-                .tasks(entity
-                            .getTasks()
-                            .stream()
+                .tasks(tasks.stream()
                         .map(taskDtoFactory::makeTaskDto)
                         .collect(Collectors.toList())
                 )
