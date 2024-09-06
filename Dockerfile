@@ -1,7 +1,9 @@
-LABEL authors="demorgan"
+FROM openjdk:17-jdk-slim
 
-FROM openjdk:17-jdk-alpine
+WORKDIR /app
 
-COPY backend/target/desaAIP-0.0.1-SNAPSHOT.jar app-1.0.0.jar
+COPY target/desaAPI-0.0.1-SNAPSHOT.jar app.jar
 
-ENTRYPOINT [ "java", "-jar", "app-1.0.0.jar" ]
+EXPOSE 8080
+
+ENTRYPOINT ["java", "-jar", "app.jar"]
