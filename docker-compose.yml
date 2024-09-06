@@ -1,0 +1,29 @@
+version: '3.9'
+
+services:
+  java_app:
+    container_name: java_app
+    build: .
+    ports:
+      - 8080:8080
+    environment:
+      - DATABASE_URL=jdbc:postgresql://java_db:5432/desaapi
+      - DATABASE_USERNAME=desaapi_user
+      - DATABASE_PASSWORD=desaapi_password
+    depends_on:
+      - java_db
+
+  java_db:
+    container_name: java_db
+    image: postgres:15
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: desaapi_user
+      POSTGRES_PASSWORD: desaapi_password
+      POSTGRES_DB: desaapi
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata: {}
