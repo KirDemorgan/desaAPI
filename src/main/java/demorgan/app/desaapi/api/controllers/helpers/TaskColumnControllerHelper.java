@@ -24,7 +24,7 @@ public class TaskColumnControllerHelper {
                 .orElseThrow(() ->
                         new NotFoundException(
                                 String.format(
-                                        "Task state with \"%s\" id doesn't exist.",
+                                        "Task column with \"%s\" id doesn't exist.",
                                         taskStateId
                                 )
                         )

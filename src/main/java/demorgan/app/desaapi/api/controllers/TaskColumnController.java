@@ -28,8 +28,6 @@ public class TaskColumnController {
 
     TaskColumnRepository taskColumnRepository;
 
-    TaskRepository taskRepository;
-
     TaskColumnDtoFactory taskColumnDtoFactory;
 
     ProjectControllerHelper projectControllerHelper;
@@ -132,7 +130,7 @@ public class TaskColumnController {
     ) {
         TaskColumnEntity taskColumn = taskColumnControllerHelper.getTaskStateOrThrowException(taskColumnId);
 
-        taskRepository.deleteById(taskColumnId);
+        taskColumnRepository.deleteById(taskColumnId);
 
         return AnswerDto.builder()
                 .answer("Task column with id " + taskColumnId + " deleted successfully")
