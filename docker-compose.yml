@@ -3,7 +3,9 @@ version: '3.9'
 services:
   java_app:
     container_name: java_app
-    build: .
+    build:
+      dockerfile: Dockerfile
+      context: ./backend
     ports:
       - 8080:8080
     environment:
