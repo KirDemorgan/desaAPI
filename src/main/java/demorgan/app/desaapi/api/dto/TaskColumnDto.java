@@ -20,7 +20,7 @@ public class TaskColumnDto {
     String name;
 
     @NonNull
-    String position;
+    Long position;
 
     @NonNull
     @JsonProperty("created_at")
