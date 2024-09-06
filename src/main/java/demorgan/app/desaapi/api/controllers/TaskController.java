@@ -3,6 +3,7 @@ package demorgan.app.desaapi.api.controllers;
 import demorgan.app.desaapi.api.controllers.helpers.ProjectControllerHelper;
 import demorgan.app.desaapi.api.controllers.helpers.TaskColumnControllerHelper;
 import demorgan.app.desaapi.api.controllers.helpers.TaskControllerHelper;
+import demorgan.app.desaapi.api.dto.AnswerDto;
 import demorgan.app.desaapi.api.dto.TaskDto;
 import demorgan.app.desaapi.api.dto.TaskRequestDto;
 import demorgan.app.desaapi.api.exceptions.BadRequestException;
@@ -38,7 +39,7 @@ public class TaskController {
     public static final String GET_TASKS = "/projects/{task_column_id}/tasks";
     public static final String CREATE_TASK = "/projects/{task_column_id}/task";
     public static final String UPDATE_TASK = "/projects/{task_id}/task";
-    public static final String DELETE_TASK = "/projects/{task_column_id}/task";
+    public static final String DELETE_TASK = "/projects/{task_id}/task";
 
 
     @GetMapping(GET_TASKS)
@@ -118,5 +119,19 @@ public class TaskController {
         task = taskRepository.saveAndFlush(task);
 
         return taskDtoFactory.makeTaskDto(task);
+    }
+
+
+    @DeleteMapping(DELETE_TASK)
+    public AnswerDto deleteTask(
+            @PathVariable("task_id") Long taskId
+    ) {
+        TaskEntity task = taskControllerHelper.getTaskOrThrowException(taskId);
+
+        taskRepository.deleteById(taskId);
+
+        return AnswerDto.builder()
+                .answer("Task with id " + taskId + " deleted successfully")
+                .build();
     }
 }
