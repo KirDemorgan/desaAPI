@@ -1,11 +1,24 @@
 import { configureStore } from '@reduxjs/toolkit';
 import userSlice from '@/stores/user/userSlice';
 import projectSlice from '@/stores/projects/projectSlice';
+import createSagaMiddleware from 'redux-saga';
+import projectSaga from '@/stores/projects/projectSaga';
+
+const sagaMiddleware = createSagaMiddleware();
 
 export const makeStore = () => {
-	return configureStore({
-		reducer: { userSlice, projectSlice },
+	const store = configureStore({
+		reducer: {
+			userSlice,
+			projectSlice,
+		},
+		middleware: (getDefaultMiddleware) =>
+			getDefaultMiddleware().concat(sagaMiddleware),
 	});
+
+	sagaMiddleware.run(projectSaga);
+
+	return store;
 };
 
 // Infer the type of makeStore
