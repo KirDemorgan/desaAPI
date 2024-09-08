@@ -1,5 +1,5 @@
 package demorgan.app.desaapi.api.controllers;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
 import demorgan.app.desaapi.api.controllers.helpers.ProjectControllerHelper;
 import demorgan.app.desaapi.api.controllers.helpers.TaskColumnControllerHelper;
 import demorgan.app.desaapi.api.controllers.helpers.TaskControllerHelper;
@@ -26,6 +26,7 @@ import java.util.stream.Collectors;
 @Transactional
 @RequestMapping("/api")
 @RestController
+@CrossOrigin(origins = "*")
 public class TaskController {
 
     TaskRepository taskRepository;

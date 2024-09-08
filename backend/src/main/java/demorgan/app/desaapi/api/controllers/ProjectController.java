@@ -1,5 +1,5 @@
 package demorgan.app.desaapi.api.controllers;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
 import demorgan.app.desaapi.api.controllers.helpers.ProjectControllerHelper;
 import demorgan.app.desaapi.api.exceptions.BadRequestException;
 import demorgan.app.desaapi.api.dto.AnswerDto;
@@ -25,6 +25,7 @@ import java.util.stream.Stream;
 @Transactional
 @RequestMapping("/api")
 @RestController
+@CrossOrigin(origins = "*")
 public class ProjectController {
 
     ProjectRepository projectRepository;

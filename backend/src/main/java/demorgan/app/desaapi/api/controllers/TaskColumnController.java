@@ -1,5 +1,5 @@
 package demorgan.app.desaapi.api.controllers;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
 import demorgan.app.desaapi.api.controllers.helpers.ProjectControllerHelper;
 import demorgan.app.desaapi.api.controllers.helpers.TaskColumnControllerHelper;
 import demorgan.app.desaapi.api.dto.AnswerDto;
@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @Transactional
 @RequestMapping("/api")
+@CrossOrigin(origins = "*")
 @RestController
 public class TaskColumnController {
 
