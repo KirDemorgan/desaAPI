@@ -2,9 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useCookies } from 'next-client-cookies';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@/stores/stores';
-import { setAdmin } from '@/stores/user/userSlice';
+import useUserStore from '@/stores/user/useUserStore';
 import {
 	Card,
 	CardContent,
@@ -16,8 +14,7 @@ import { Input } from '@/components/ui/input';
 
 export default function AdminPage() {
 	const cookies = useCookies();
-	const dispatch = useDispatch();
-	const isAdmin = useSelector((state: RootState) => state.userSlice.isAdmin);
+	const { isAdmin, setAdmin } = useUserStore();
 
 	const [password, setPassword] = useState<string>('');
 
@@ -31,12 +28,12 @@ export default function AdminPage() {
 
 	useEffect(() => {
 		if (password === adminPswd) {
-			dispatch(setAdmin());
+			setAdmin();
 			const today = new Date();
 			const priorDate = new Date(new Date().setDate(today.getDate() + 30));
 			cookies.set('ACCESS_TOKEN', adminPswd, { expires: priorDate });
 		}
-	}, [password, adminPswd, dispatch, cookies]);
+	}, [password, adminPswd, setAdmin, cookies]);
 
 	return (
 		<main className="h-screen">

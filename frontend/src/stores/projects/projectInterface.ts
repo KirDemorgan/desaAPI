@@ -23,8 +23,11 @@ export interface Project {
 }
 
 export interface ProjectSlice {
-	projects: Array<Project>;
+	projects: Project[];
 	loading: boolean;
 	error: string | null;
 	currentProject: Project | null;
+	getProjects: () => void;
+	getProject: (name: string) => void;
+	setNewProject: (name: string) => void;
 }

@@ -1,25 +1,22 @@
 'use client';
-import { useAppDispatch } from '@/stores/hooks';
+
 import { useEffect } from 'react';
-import { getProjects } from '@/stores/projects/projectSlice';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/stores/stores';
+import useProjectStore from '@/stores/projects/useProjectStore';
+import useUserStore from '@/stores/user/useUserStore';
 import { AddNewProject } from '@/components/admin/AddNewProject';
 import { useRouter } from 'next/navigation';
+import {Project} from "@/stores/projects/projectInterface";
 
 export const ProjectsList = () => {
-	const dispatcher = useAppDispatch();
+	const { getProjects, projects } = useProjectStore();
+	const { isAdmin } = useUserStore();
 	const router = useRouter();
-	const projectsList = useSelector(
-		(state: RootState) => state.projectSlice.projects,
-	);
-	const isAdmin = useSelector((state: RootState) => state.userSlice.isAdmin);
 
 	useEffect(() => {
-		dispatcher(getProjects());
-	}, [dispatcher]);
+		getProjects();
+	}, [getProjects]);
 
-	if (projectsList.length <= 0) {
+	if (projects.length <= 0) {
 		if (isAdmin) {
 			return (
 				<>
@@ -33,7 +30,7 @@ export const ProjectsList = () => {
 	return (
 		<>
 			<ul className="flex flex-col gap-1.5">
-				{projectsList.map((project) => (
+				{projects.map((project: Project) => (
 					<li
 						key={project.id}
 						className="cursor-pointer"

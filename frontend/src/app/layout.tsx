@@ -3,7 +3,6 @@ import localFont from 'next/font/local';
 import './globals.css';
 import { ReactQueryClientWrapper } from '@/components/ReactQueryClientWrapper';
 import { NextClientCookieWrapper } from '@/components/NextClientCookieWrapper';
-import { ReduxStoreProvider } from '@/components/ReduxStoreProvider';
 
 const geistSans = localFont({
 	src: './fonts/GeistVF.woff',
@@ -29,7 +28,7 @@ export default function RootLayout({
 	return (
 		<ReactQueryClientWrapper>
 			<NextClientCookieWrapper>
-				<ReduxStoreProvider>
+
 					<html lang="en" className="h-screen">
 						<body
 							className={`${geistSans.variable} ${geistMono.variable} h-screen antialiased`}
@@ -37,7 +36,6 @@ export default function RootLayout({
 							{children}
 						</body>
 					</html>
-				</ReduxStoreProvider>
 			</NextClientCookieWrapper>
 		</ReactQueryClientWrapper>
 	);

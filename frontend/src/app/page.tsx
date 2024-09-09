@@ -1,4 +1,5 @@
 'use client';
+
 import {
 	Card,
 	CardContent,
@@ -8,23 +9,22 @@ import {
 } from '@/components/ui/card';
 import { ProjectsList } from '@/components/ProjectsList';
 import { useCookies } from 'next-client-cookies';
-import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { setAdmin } from '@/stores/user/userSlice';
+import useUserStore from '@/stores/user/useUserStore';
 
 export default function Home() {
 	const cookies = useCookies();
-
-	const dispatch = useDispatch();
+	const { setAdmin } = useUserStore();
 
 	const token = cookies.get('ACCESS_TOKEN');
 	const adminPswd = process.env.NEXT_PUBLIC_ADMIN_SECURE;
 
 	useEffect(() => {
 		if (token === adminPswd) {
-			dispatch(setAdmin());
+			setAdmin();
 		}
-	}, [adminPswd, dispatch, token]);
+	}, [adminPswd, setAdmin, token]);
+
 	return (
 		<div className="h-screen flex items-center justify-center w-full flex-grow">
 			<Card className="w-[350px]">

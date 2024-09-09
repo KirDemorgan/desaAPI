@@ -19,8 +19,7 @@ import {
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useAppDispatch } from '@/stores/hooks';
-import { setNewProject } from '@/stores/projects/projectSlice';
+import useProjectStore from '@/stores/projects/useProjectStore';
 import { useState } from 'react';
 
 const formSchema = z.object({
@@ -31,7 +30,7 @@ const formSchema = z.object({
 
 export const AddNewProject = () => {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
-	const dispatcher = useAppDispatch();
+	const { setNewProject } = useProjectStore();
 
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
@@ -41,7 +40,7 @@ export const AddNewProject = () => {
 	});
 
 	const onSubmit = (values: z.infer<typeof formSchema>) => {
-		dispatcher(setNewProject(values));
+		setNewProject(values.name);
 		setIsOpen(false);
 	};
 
